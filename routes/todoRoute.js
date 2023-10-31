@@ -11,7 +11,7 @@ router.post("/add", async (req, res) => {
         const data = await todoModel.create({ title, description });
         res.status(201).json(data);
     } catch (e) {
-        console.log(e);
+        res.status(401).json(e);
     }
 });
 
@@ -20,7 +20,7 @@ router.get("/get", async (req, res) => {
         const data = await todoModel.find();
         res.status(201).json(data);
     } catch (e) {
-        console.log(e);
+        res.status(401).json(e);
     }
 });
 
@@ -33,7 +33,7 @@ router.get("/get/:id", async (req, res) => {
             return res.status(201).json(data);
         }
     } catch (e) {
-        console.log(e.message);
+        res.status(401).json(e);
     }
 });
 
@@ -42,7 +42,7 @@ router.put("/edit/:id", async (req, res) => {
         const data = await todoModel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
         res.status(201).json(data);
     } catch (e) {
-        console.log(e);
+        res.status(401).json(e);
     }
 });
 
@@ -51,7 +51,7 @@ router.delete("/delete/:id", async (req, res) => {
         await todoModel.findByIdAndDelete(req.params.id);
         res.status(201).json("todo deleted");
     } catch (e) {
-        console.log(e);
+        res.status(401).json(e);
     }
 });
 
