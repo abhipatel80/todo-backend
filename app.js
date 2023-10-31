@@ -10,6 +10,10 @@ const port = process.env.PORT || 8000;
 
 dbConnection();
 
+app.get("/", async (req, res) => {
+    return res.status(201).json({ success: true })
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
